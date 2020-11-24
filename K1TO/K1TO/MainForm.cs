@@ -23,7 +23,7 @@ namespace K1TO
         {
             var control = new TreeGridView
             {
-                Size = new Size(100, 150)
+                Size = new Size(-1, 500)
             };
             control.Columns.Add(new GridColumn { DataCell = new TextBoxCell(0) });
             TreeGridItemCollection collection = new TreeGridItemCollection();
@@ -41,7 +41,7 @@ namespace K1TO
             ProgramState currentState = new ProgramState();
             Label testing = new Label { Text = currentState.currentlySelectedFile };
             Title = "K1TO";
-            ClientSize = new Size(400, 350);
+            ClientSize = new Size(500, 500);
             FileTreeView carpet = new FileTreeView();
             Content = new TableLayout
             {
@@ -51,10 +51,7 @@ namespace K1TO
     {
         new TableRow(
             // Selected File
-            FileTreeView(),
-            new TableCell(new Label { Text = "First Column" }, true),
-            new TableCell(new Label { Text = "Second Column" }, true),
-            testing
+            FileTreeView()
         ),
         new TableRow(
             new TextBox { Text = "Some text" },
