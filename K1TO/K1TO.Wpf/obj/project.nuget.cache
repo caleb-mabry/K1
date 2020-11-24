@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "y0hiV8/oV87eUNf9BUU2SghZ0bfJgZAv7QoQ5uQObWA0PT6jY3BvIyCCuTVLGMphuiLqEO6V+1y+a107wupFJg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Koi\\source\\repos\\K1TO\\K1TO\\K1TO.Wpf\\K1TO.Wpf.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Koi\\.nuget\\packages\\eto.forms\\2.5.0\\eto.forms.2.5.0.nupkg.sha512",
+    "C:\\Users\\Koi\\.nuget\\packages\\eto.platform.wpf\\2.5.0\\eto.platform.wpf.2.5.0.nupkg.sha512",
+    "C:\\Users\\Koi\\.nuget\\packages\\system.componentmodel.annotations\\4.7.0\\system.componentmodel.annotations.4.7.0.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "e8JbeZ4fgmcd0i64rDylUR1B16m4PC+hu+CVmG1pKaB6PeBbd+cPvsaYo5XLj2C153VxISQeBSwukbH2IBVAuQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Koi\\source\\repos\\K1TO\\K1TO\\K1TO\\K1TO.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Koi\\.nuget\\packages\\eto.forms\\2.5.0\\eto.forms.2.5.0.nupkg.sha512",
+    "C:\\Users\\Koi\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\Koi\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\Koi\\.nuget\\packages\\system.componentmodel.annotations\\4.7.0\\system.componentmodel.annotations.4.7.0.nupkg.sha512"
+  ],
+  "logs": []
+}

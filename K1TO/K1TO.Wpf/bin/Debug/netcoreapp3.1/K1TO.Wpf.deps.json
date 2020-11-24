@@ -1,0 +1,84 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "K1TO.Wpf/1.0.0": {
+        "dependencies": {
+          "Eto.Platform.Wpf": "2.5.0",
+          "K1TO": "1.0.0"
+        },
+        "runtime": {
+          "K1TO.Wpf.dll": {}
+        }
+      },
+      "Eto.Forms/2.5.0": {
+        "dependencies": {
+          "System.ComponentModel.Annotations": "4.7.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Eto.dll": {
+            "assemblyVersion": "2.5.0.0",
+            "fileVersion": "2.5.7354.32680"
+          }
+        }
+      },
+      "Eto.Platform.Wpf/2.5.0": {
+        "dependencies": {
+          "Eto.Forms": "2.5.0"
+        },
+        "runtime": {
+          "lib/netcoreapp3.0/Eto.Wpf.dll": {
+            "assemblyVersion": "2.5.0.0",
+            "fileVersion": "2.5.7354.32684"
+          }
+        }
+      },
+      "System.ComponentModel.Annotations/4.7.0": {},
+      "K1TO/1.0.0": {
+        "dependencies": {
+          "Eto.Forms": "2.5.0"
+        },
+        "runtime": {
+          "K1TO.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "K1TO.Wpf/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Eto.Forms/2.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-7BZBtN2Zg5qzwIwtBAPUp4fU529M7kD6J4WiXYM0/T58+H2ZBzYYk89+FTSE178TwhkDnP0EE6zeqmbla4zS4Q==",
+      "path": "eto.forms/2.5.0",
+      "hashPath": "eto.forms.2.5.0.nupkg.sha512"
+    },
+    "Eto.Platform.Wpf/2.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-b1FgAGzEHZQ7UDxmqQURWqxcIQ3HV/EqhH1O0OU3A2toXOgN0bGg7/BpJjuysm6EiBKL+nhl8qrrBBpmBgFvPQ==",
+      "path": "eto.platform.wpf/2.5.0",
+      "hashPath": "eto.platform.wpf.2.5.0.nupkg.sha512"
+    },
+    "System.ComponentModel.Annotations/4.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-0YFqjhp/mYkDGpU0Ye1GjE53HMp9UVfGN7seGpAMttAC0C40v5gw598jCgpbBLMmCo0E5YRLBv5Z2doypO49ZQ==",
+      "path": "system.componentmodel.annotations/4.7.0",
+      "hashPath": "system.componentmodel.annotations.4.7.0.nupkg.sha512"
+    },
+    "K1TO/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

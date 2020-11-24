@@ -1,0 +1,9 @@
+C:\Users\Koi\source\repos\K1TO\K1TO\K1TO\bin\Debug\netstandard2.0\K1TO.deps.json
+C:\Users\Koi\source\repos\K1TO\K1TO\K1TO\bin\Debug\netstandard2.0\K1TO.dll
+C:\Users\Koi\source\repos\K1TO\K1TO\K1TO\bin\Debug\netstandard2.0\K1TO.pdb
+C:\Users\Koi\source\repos\K1TO\K1TO\K1TO\obj\Debug\netstandard2.0\K1TO.AssemblyInfoInputs.cache
+C:\Users\Koi\source\repos\K1TO\K1TO\K1TO\obj\Debug\netstandard2.0\K1TO.AssemblyInfo.cs
+C:\Users\Koi\source\repos\K1TO\K1TO\K1TO\obj\Debug\netstandard2.0\K1TO.csproj.CoreCompileInputs.cache
+C:\Users\Koi\source\repos\K1TO\K1TO\K1TO\obj\Debug\netstandard2.0\K1TO.dll
+C:\Users\Koi\source\repos\K1TO\K1TO\K1TO\obj\Debug\netstandard2.0\K1TO.pdb
+C:\Users\Koi\source\repos\K1TO\K1TO\K1TO\obj\Debug\netstandard2.0\K1TO.csprojAssemblyReference.cache

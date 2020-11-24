@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "lf3wF5apDTDwtf/e63fZc0MjIhf0XnGqRlSDzZOCmidBGKXIB2hvz8DW+HNIC8UtyWlqqBN3ut42KXvgffBLWw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Koi\\source\\repos\\K1TO\\K1TO\\K1TO.Mac\\K1TO.Mac.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Koi\\.nuget\\packages\\eto.forms\\2.5.0\\eto.forms.2.5.0.nupkg.sha512",
+    "C:\\Users\\Koi\\.nuget\\packages\\eto.platform.mac64\\2.5.0\\eto.platform.mac64.2.5.0.nupkg.sha512",
+    "C:\\Users\\Koi\\.nuget\\packages\\system.componentmodel.annotations\\4.7.0\\system.componentmodel.annotations.4.7.0.nupkg.sha512",
+    "C:\\Users\\Koi\\.nuget\\packages\\microsoft.netcore.app.runtime.osx-x64\\3.1.8\\microsoft.netcore.app.runtime.osx-x64.3.1.8.nupkg.sha512",
+    "C:\\Users\\Koi\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.osx-x64\\3.1.8\\microsoft.aspnetcore.app.runtime.osx-x64.3.1.8.nupkg.sha512",
+    "C:\\Users\\Koi\\.nuget\\packages\\microsoft.netcore.app.host.osx-x64\\3.1.8\\microsoft.netcore.app.host.osx-x64.3.1.8.nupkg.sha512"
+  ],
+  "logs": []
+}
