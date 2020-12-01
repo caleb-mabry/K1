@@ -17,7 +17,6 @@ namespace K1TO
             OpenFileDialog folderDialog = new OpenFileDialog();
             folderDialog.ShowDialog(this);
             currentState.currentlySelectedFile = folderDialog.FileName;
-            MessageBox.Show(currentState.currentlySelectedFile);
         }
         Control FileTreeView()
         {
@@ -64,14 +63,19 @@ namespace K1TO
     }
             };
             // create a few commands that can be used for the menu and toolbar
-            Command clickMe = new Command { MenuText = "Click Me!", ToolBarText = "Click Me!" };
-            clickMe.Executed += (sender, e) => MessageBox.Show(FileInformation.testing());
+            //Command clickMe = new Command { MenuText = "Click Me!", ToolBarText = "Click Me!" };
+            //clickMe.Executed += (sender, e) => MessageBox.Show("Carpediem");
 
             Command openFile = new Command { MenuText = "Open", ToolBarText = "Open" };
             openFile.Executed += (sender, e) =>
             {
                 selectFile(currentState);
-                
+                var message = "";
+                foreach (string filename in FileInformation.getFileInformation(currentState.currentlySelectedFile))
+                {
+                    message += filename + '\n';
+                };
+                MessageBox.Show(message);
             };
             openFile.Executed += (sender, e) => testing.Text = currentState.currentlySelectedFile;
 
@@ -102,7 +106,8 @@ namespace K1TO
 
 
             // create toolbar			
-            ToolBar = new ToolBar { Items = { clickMe } };
+            //ToolBar = new ToolBar { Items = { clickMe } };
+
         }
     }
 }
