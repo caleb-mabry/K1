@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace K1TO.Compression
+namespace K1TO.BinaryReaders
 {
-    class Zip
+    class Class1
     {
     }
 }

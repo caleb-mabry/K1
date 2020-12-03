@@ -11,6 +11,7 @@ namespace K1TO.Plugins
         public string Extension => ".zip";
 
         public int FileByteIdentifier => 0;
+        public FileInformation FileInfo;
         public byte[] NewFileMagic = new byte[] { 0x50 };
         public int fileHeader;
         public short versionExtract;
@@ -26,16 +27,13 @@ namespace K1TO.Plugins
         public byte[] firstFileName;
         public byte[] extraInformation;
         public List<string> filesWithin = new List<string>();
-        public ZipPlugin()
-        {
-
-        }
 
         public ZipPlugin(BinaryReader reader)
         {
+            FileInfo = new FileInformation();
+
             try
             {
-
                 using (reader)
                 {
                     fileHeader = reader.ReadInt32();
@@ -54,6 +52,14 @@ namespace K1TO.Plugins
                         extraFieldLength = reader.ReadInt16();
                         firstFileName = reader.ReadBytes(fileNameLength);
                         extraInformation = reader.ReadBytes(extraFieldLength);
+                        if (Encoding.Default.GetString(firstFileName) != "")
+                        {
+                            Debug.WriteLine(Encoding.Default.GetString(firstFileName));
+                            var childFile = new FileInformation();
+                            childFile.filename = Encoding.Default.GetString(firstFileName);
+                            FileInfo.children.Add(childFile);
+
+                        }
                         filesWithin.Add(Encoding.Default.GetString(firstFileName));
                         List<int> compressedData = new List<int>();
                         var potentialData = reader.ReadByte();
@@ -73,7 +79,6 @@ namespace K1TO.Plugins
                                 }
                             }
                         }
-                        Debug.WriteLine(fileHeader.ToString("X"));
                     }
 
                 }

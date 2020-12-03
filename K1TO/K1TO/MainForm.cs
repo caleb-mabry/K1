@@ -9,6 +9,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using K1TO.BinaryReaders;
+using K1TO.Plugins;
+
 namespace K1TO
 {
     public partial class MainForm : Form
@@ -29,15 +32,34 @@ namespace K1TO
             // Show dialog and set state
             folderDialog.ShowDialog(this);
             currentState.currentlySelectedFile = folderDialog.FileName;
-            this.updateTree();
+            readFile();
 
+        }
+
+        //TODO:: SET THIS TO BE DYNAMIC IN THE FUTURE
+        private void readFile()
+        {
+            LittleEndian reader = new LittleEndian(new FileStream(currentState.currentlySelectedFile, FileMode.Open));
+            ZipPlugin zipFile = new ZipPlugin(reader);
+            var tempFilename = fileInformation.filename;
+            fileInformation = zipFile.FileInfo;
+            fileInformation.filename = tempFilename;
+           
+
+            updateTree();
         }
         private void updateTree()
         {
-            fileInformation.getFileInformation(currentState.currentlySelectedFile);
-            var item = new TreeGridItem(Path.GetFileName(currentState.currentlySelectedFile));
             var collection = new TreeGridItemCollection();
-            collection.Add(item);
+            var children = new TreeGridItemCollection();
+            foreach (var info in this.fileInformation.children)
+            {
+                var tempItem = new TreeGridItem(Path.GetFileName(info.filename));
+                children.Add(tempItem);
+            }
+            var topLevelItem = new TreeGridItem(children, Path.GetFileName(currentState.currentlySelectedFile));
+            collection.Add(topLevelItem);
+
             this.treeView.DataStore = collection;
         }
 
