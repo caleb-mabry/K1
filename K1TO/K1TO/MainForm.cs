@@ -4,13 +4,18 @@ using K1TO.Interfaces;
 using K1TO.UiElements;
 using System.Collections.Generic;
 using System.Diagnostics;
-
+using System;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 namespace K1TO
 {
     public partial class MainForm : Form
     {
         ProgramState currentState = new ProgramState();
         FileHierarchy treeView = new FileHierarchy();
+        FileInformation fileInformation = new FileInformation();
         private void SelectFile(ProgramState currentState)
         {
             // Create Folder Dialog
@@ -24,6 +29,16 @@ namespace K1TO
             // Show dialog and set state
             folderDialog.ShowDialog(this);
             currentState.currentlySelectedFile = folderDialog.FileName;
+            this.updateTree();
+
+        }
+        private void updateTree()
+        {
+            fileInformation.getFileInformation(currentState.currentlySelectedFile);
+            var item = new TreeGridItem(Path.GetFileName(currentState.currentlySelectedFile));
+            var collection = new TreeGridItemCollection();
+            collection.Add(item);
+            this.treeView.DataStore = collection;
         }
 
         Control TableLayout()

@@ -43,7 +43,7 @@ namespace K1TO
     }
     class FileInformation
     {
-        public static List<string> getFileInformation(string filepath)
+        public List<string> getFileInformation(string filepath)
         {
             ProgramState thing = new ProgramState();
             if (filepath != "")
@@ -51,8 +51,7 @@ namespace K1TO
                 BinaryReader2 reader = new BinaryReader2(new FileStream(filepath, FileMode.Open));
                 Plugins.ZipPlugin zipFile = new Plugins.ZipPlugin(reader);
                 return zipFile.filesWithin;
-
-            }
+            };
             return new List<string>{ };
 
 

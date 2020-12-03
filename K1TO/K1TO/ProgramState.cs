@@ -9,7 +9,8 @@ namespace K1TO
 {
     class ProgramState
     {
-        public string currentlySelectedFile; 
+        public string currentlySelectedFile;
+
         public static List<string> supportedExtensions()
         {
             List<String> supportedExtensions = new List<string>();
