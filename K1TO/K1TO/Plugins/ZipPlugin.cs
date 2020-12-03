@@ -26,6 +26,10 @@ namespace K1TO.Plugins
         public byte[] firstFileName;
         public byte[] extraInformation;
         public List<string> filesWithin = new List<string>();
+        public ZipPlugin()
+        {
+
+        }
 
         public ZipPlugin(BinaryReader reader)
         {

@@ -1,113 +1,72 @@
 using Eto.Drawing;
 using Eto.Forms;
+using K1TO.Interfaces;
 using K1TO.UiElements;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace K1TO
 {
     public partial class MainForm : Form
     {
-        /// <summary>
-        /// A file dialog that allows the user to select a file given all of the currently supported file types that
-        /// are available for the program. This will set the current state of the program.
-        /// </summary>
-        /// <param name="currentState">The current state of the program</param>
-        private void selectFile(ProgramState currentState)
+        ProgramState currentState = new ProgramState();
+        FileHierarchy treeView = new FileHierarchy();
+        private void SelectFile(ProgramState currentState)
         {
+            // Create Folder Dialog
             OpenFileDialog folderDialog = new OpenFileDialog();
+            
+            // Set supported extensions (Manual for now)
+            string[] extensions = new string[] { ".zip" };
+            var zipExtension = new FileFilter("Zip", extensions);
+            folderDialog.Filters.Add(zipExtension);
+
+            // Show dialog and set state
             folderDialog.ShowDialog(this);
             currentState.currentlySelectedFile = folderDialog.FileName;
         }
-        Control FileTreeView()
-        {
-            var control = new TreeGridView
-            {
-                Size = new Size(-1, 500)
-            };
-            control.Columns.Add(new GridColumn { DataCell = new TextBoxCell(0) });
-            TreeGridItemCollection collection = new TreeGridItemCollection();
-            TreeGridItem item = new TreeGridItem("Crikey");
-            List<TreeGridItem> children = new List<TreeGridItem>();
-            children.Add(item);
-            TreeGridItem item2 = new TreeGridItem(children, "Crikey2");
 
-            collection.Add(item2);
-            control.DataStore = collection;
-            return control;
+        Control TableLayout()
+        {
+            var table = new TableLayout();
+            table.Spacing = new Size(5, 5); // Set space between each cell
+            table.Padding = new Padding(10, 10, 10, 10); // Set space around table's sides
+
+            table.Rows.Add(TopRow());
+
+            return table;
         }
-        public MainForm()
+        private TableRow TopRow()
         {
-            ProgramState currentState = new ProgramState();
-            Label testing = new Label { Text = currentState.currentlySelectedFile };
-            Title = "K1TO";
-            ClientSize = new Size(500, 500);
-            FileTreeView carpet = new FileTreeView();
-            Content = new TableLayout
-            {
-                Spacing = new Size(5, 5), // space between each cell
-                Padding = new Padding(10, 10, 10, 10), // space around the table's sides
-                Rows =
-    {
-        new TableRow(
-            // Selected File
-            FileTreeView()
-        ),
-        new TableRow(
-            new TextBox { Text = "Some text" },
-            new DropDown { Items = { "Item 1", "Item 2", "Item 3" } },
-            new CheckBox { Text = "A checkbox" }
-        ),
-		// by default, the last row & column will get scaled. This adds a row at the end to take the extra space of the form.
-		// otherwise, the above row will get scaled and stretch the TextBox/ComboBox/CheckBox to fill the remaining height.
-		new TableRow { ScaleHeight = true }
-    }
-            };
-            // create a few commands that can be used for the menu and toolbar
-            //Command clickMe = new Command { MenuText = "Click Me!", ToolBarText = "Click Me!" };
-            //clickMe.Executed += (sender, e) => MessageBox.Show("Carpediem");
-
-            Command openFile = new Command { MenuText = "Open", ToolBarText = "Open" };
-            openFile.Executed += (sender, e) =>
-            {
-                selectFile(currentState);
-                var message = "";
-                foreach (string filename in FileInformation.getFileInformation(currentState.currentlySelectedFile))
-                {
-                    message += filename + '\n';
-                };
-                MessageBox.Show(message);
-            };
-            openFile.Executed += (sender, e) => testing.Text = currentState.currentlySelectedFile;
+            return new TableRow(treeView);
+        }
+        
+        MenuBar MainMenu()
+        {
+            var mainMenu = new MenuBar();
+            
+            // Create Commands
+            Command openFile = new Command { MenuText = "Open File" };
+            openFile.Executed += (sender, e) => SelectFile(currentState);
 
             Command quitCommand = new Command { MenuText = "Quit", Shortcut = Application.Instance.CommonModifier | Keys.Q };
             quitCommand.Executed += (sender, e) => Application.Instance.Quit();
 
-            Command aboutCommand = new Command { MenuText = "About..." };
-            aboutCommand.Executed += (sender, e) => new AboutDialog().ShowDialog(this);
+            // Add commands and items
+            mainMenu.Items.Add(new ButtonMenuItem { Text = "&File", Items = { openFile } });
+            mainMenu.QuitItem = quitCommand;
 
-            // create menu
-            Menu = new MenuBar
-            {
-                Items =
-                {
-					// File submenu
-					new ButtonMenuItem { Text = "&File", Items = { openFile } },
-					// new ButtonMenuItem { Text = "&Edit", Items = { /* commands/items */ } },
-					// new ButtonMenuItem { Text = "&View", Items = { /* commands/items */ } },
-				},
-                ApplicationItems =
-                {
-					// application (OS X) or file menu (others)
-					new ButtonMenuItem { Text = "&Preferences..." },
-                },
-                QuitItem = quitCommand,
-                AboutItem = aboutCommand
-            };
+            return mainMenu;
+        }
 
+        public MainForm()
+        {
+            Title = "K1TO";
+            ClientSize = new Size(500, 500);
+            
+            Menu = MainMenu();
 
-            // create toolbar			
-            //ToolBar = new ToolBar { Items = { clickMe } };
-
+            Content = TableLayout();
         }
     }
 }
