@@ -52,6 +52,7 @@ namespace K1TO.Plugins
                         extraFieldLength = reader.ReadInt16();
                         firstFileName = reader.ReadBytes(fileNameLength);
                         extraInformation = reader.ReadBytes(extraFieldLength);
+                        // Add Filename
                         if (Encoding.Default.GetString(firstFileName) != "")
                         {
                             Debug.WriteLine(Encoding.Default.GetString(firstFileName));
@@ -59,26 +60,50 @@ namespace K1TO.Plugins
                             childFile.filename = Encoding.Default.GetString(firstFileName);
                             FileInfo.children.Add(childFile);
 
+                            // I need to see about removing this line. I think it's out of scope
+                            filesWithin.Add(Encoding.Default.GetString(firstFileName));
+
                         }
-                        filesWithin.Add(Encoding.Default.GetString(firstFileName));
                         List<int> compressedData = new List<int>();
+                        var prevPosition = reader.BaseStream.Position;
                         var potentialData = reader.ReadByte();
                         var foundNewFile = false;
-                        while (potentialData != NewFileMagic[0] && foundNewFile == false)
+                        while(foundNewFile == false)
                         {
-                            compressedData.Add(potentialData);
-                            potentialData = reader.ReadByte();
                             if (potentialData == NewFileMagic[0])
                             {
-                                reader.BaseStream.Seek(-1, SeekOrigin.Current);
-                                var checkIfNewFile = reader.ReadInt32();
-                                if (checkIfNewFile == 0x04034b50)
-                                {
-                                    foundNewFile = true;
-                                    fileHeader = checkIfNewFile;
-                                }
+                                reader.BaseStream.Position = prevPosition;
+                                fileHeader = reader.ReadInt32();
+                                foundNewFile = true;
+                            } else
+                            {
+                                compressedData.Add(potentialData);
+                                prevPosition = reader.BaseStream.Position;
+                                potentialData = reader.ReadByte();
                             }
                         }
+
+                        //Debug.WriteLine(potentialData.ToString("X"));
+                        //while (potentialData != NewFileMagic[0] && foundNewFile == false)
+                        //{
+                        //    compressedData.Add(potentialData);
+                        //    potentialData = reader.ReadByte();
+                        //    if (potentialData == NewFileMagic[0])
+                        //    {
+                        //        reader.BaseStream.Position = prevPosition;
+                        //        var checkIfNewFile = reader.ReadInt32();
+                        //        Debug.WriteLine(checkIfNewFile.ToString("X"));
+                        //        if (checkIfNewFile == 0x04034b50)
+                        //        {
+                        //            foundNewFile = true;
+                        //            fileHeader = checkIfNewFile;
+                        //        }
+                        //        else
+                        //        {
+
+                        //        }
+                        //    }
+                        //}
                     }
 
                 }
