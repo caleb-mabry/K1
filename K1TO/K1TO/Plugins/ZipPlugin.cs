@@ -31,13 +31,11 @@ namespace K1TO.Plugins
         public ZipPlugin(BinaryReader reader)
         {
             FileInfo = new FileInformation();
-
-            try
-            {
+            
                 using (reader)
                 {
+                Debug.WriteLine("The length of the file: " +reader.BaseStream.Length);
                     fileHeader = reader.ReadInt32();
-                    Debug.WriteLine(fileHeader.ToString("X"));
                     while (fileHeader != 0x02014b50)
                     {
                         versionExtract = reader.ReadInt16();
@@ -55,7 +53,6 @@ namespace K1TO.Plugins
                         // Add Filename
                         if (Encoding.Default.GetString(firstFileName) != "")
                         {
-                            Debug.WriteLine(Encoding.Default.GetString(firstFileName));
                             var childFile = new FileInformation();
                             childFile.filename = Encoding.Default.GetString(firstFileName);
                             FileInfo.children.Add(childFile);
@@ -70,48 +67,33 @@ namespace K1TO.Plugins
                         var foundNewFile = false;
                         while(foundNewFile == false)
                         {
-                            if (potentialData == NewFileMagic[0])
+                        Debug.WriteLine(reader.BaseStream.Position + " " + potentialData.ToString("X"));
+
+                        if (potentialData == NewFileMagic[0])
                             {
                                 reader.BaseStream.Position = prevPosition;
                                 fileHeader = reader.ReadInt32();
-                                foundNewFile = true;
-                            } else
+                                if (fileHeader == 0x4034B50 || fileHeader == 0x02014b50)
+                                {
+                                    foundNewFile = true;
+                                } 
+                                else
+                                {
+                                    compressedData.Add(potentialData);
+                                    potentialData = reader.ReadByte();  
+                                }
+                            } 
+                            else
                             {
+
                                 compressedData.Add(potentialData);
                                 prevPosition = reader.BaseStream.Position;
                                 potentialData = reader.ReadByte();
                             }
                         }
-
-                        //Debug.WriteLine(potentialData.ToString("X"));
-                        //while (potentialData != NewFileMagic[0] && foundNewFile == false)
-                        //{
-                        //    compressedData.Add(potentialData);
-                        //    potentialData = reader.ReadByte();
-                        //    if (potentialData == NewFileMagic[0])
-                        //    {
-                        //        reader.BaseStream.Position = prevPosition;
-                        //        var checkIfNewFile = reader.ReadInt32();
-                        //        Debug.WriteLine(checkIfNewFile.ToString("X"));
-                        //        if (checkIfNewFile == 0x04034b50)
-                        //        {
-                        //            foundNewFile = true;
-                        //            fileHeader = checkIfNewFile;
-                        //        }
-                        //        else
-                        //        {
-
-                        //        }
-                        //    }
-                        //}
                     }
 
                 }
-            }
-            catch
-            {
-                Debug.WriteLine("Man this is tough"); 
-            }
         }
     }
 }
