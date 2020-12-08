@@ -55,6 +55,7 @@ namespace K1TO.Plugins
 
                     var childFile = new FileInformation();
                     childFile.filename = Encoding.Default.GetString(firstFileName);
+                    childFile.data = compressedData;
                     FileInfo.children.Add(childFile);
                 }
             }
