@@ -14,11 +14,8 @@ namespace K1TO.UiElements
             this.Columns.Add(new GridColumn { DataCell = new TextBoxCell(0) });
 
             TreeGridItemCollection _collection = new TreeGridItemCollection();
-            TreeGridItem child = new TreeGridItem("Balloon");
-            List<TreeGridItem> children = new List<TreeGridItem>();
-            children.Add(child);
-            TreeGridItem topLevelItem = new TreeGridItem(children, "Crikey2");
-            _collection.Add(topLevelItem);
+            TreeGridItem child = new TreeGridItem("Select a file to start");
+            _collection.Add(child);
             this.DataStore = _collection;
         }
 
